@@ -35,4 +35,29 @@ internal class Divider
         }
         return (n, count);
     }
+
+    public static string FindLongestRepeatingSubstring(string input)
+    {
+        int n = input.Length;
+        string longestSubstring = "";
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i + 1; j < n; j++)
+            {
+                int length = j - i;
+                if (i + 2 * length <= n)
+                {
+                    string substring = input.Substring(i, length);
+                    string nextSubstring = input.Substring(i + length, length);
+                    if (substring.Equals(nextSubstring) && !substring.Equals(longestSubstring))
+                    {
+                        longestSubstring = substring;
+                    }
+                }
+            }
+        }
+
+        return longestSubstring;
+    }
 }
